@@ -5,8 +5,8 @@ import { fbSignUpUser } from '../../firebase';
 import { isValidMail } from '../../helpers/validators';
 
 function SignInSignUp() {
-  const lengthValidator = (rawValue) => (!rawValue || rawValue.length < 6 ? { isMissing: true, message: 'must have at least 6 characters' } : null);
-  const mailValidator = (rawValue) => (!isValidMail(rawValue) ? { isMissing: true, message: 'not a valid email address' } : null);
+  const lengthValidator = (rawValue) => (!rawValue || rawValue.length < 6 ? { isMissing: true, message: 'password must have at least 6 characters' } : null);
+  const mailValidator = (rawValue) => (!isValidMail(rawValue) ? { isMissing: true, message: 'this is not a valid email address' } : null);
 
   const group = createFormGroup({
     password: createFormControl('', {
@@ -43,24 +43,20 @@ function SignInSignUp() {
         <TextInput
           name="email"
           type="email"
+          label="email"
           placeholder="email"
           control={group.controls.email}
         />
 
-        <br />
-
         <TextInput
           name="password"
           type="password"
+          label="password"
           placeholder="password"
           control={group.controls.password}
         />
 
-        <br />
-
         <button disabled={!group.isValid} type="submit">Signup</button>
-
-        <br />
 
       </form>
     </div>
