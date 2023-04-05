@@ -1,4 +1,4 @@
-import { Show, For } from 'solid-js';
+import { Show } from 'solid-js';
 
 export function TextInput(props) {
   return (
@@ -26,9 +26,7 @@ export function TextInput(props) {
       />
 
       <Show when={props.control.isTouched && !props.control.isValid}>
-        <For each={Object.values(props.control.errors)}>
-          {(errorMsg) => <small>{errorMsg}</small>}
-        </For>
+        <span>{props.control.errors.message}</span>
       </Show>
     </label>
   );
