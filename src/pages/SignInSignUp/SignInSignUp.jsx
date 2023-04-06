@@ -58,7 +58,7 @@ function SignInSignUp() {
         await fbSignUpUser(email, password);
       }
 
-      navigate('/', { replace: true });
+      navigate('/add', { replace: true });
     } catch (err) {
       if (isForLogin()) {
         if (err.message === 'auth/user-not-found' || err.message === 'auth/wrong-password') {
