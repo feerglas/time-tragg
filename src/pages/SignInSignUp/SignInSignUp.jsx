@@ -1,6 +1,6 @@
 import { createSignal, Show } from 'solid-js';
 import { createFormGroup, createFormControl } from 'solid-forms';
-import { useNavigate } from '@solidjs/router';
+import { useNavigate, A } from '@solidjs/router';
 
 import { TextInput } from '../../components/TextInput/TextInput.jsx';
 import { Button } from '../../components/Button/Button.jsx';
@@ -112,8 +112,14 @@ function SignInSignUp() {
         <Button disabled={!group.isValid} type="submit" text={isForLogin() ? 'Login' : 'Sign Up'} />
 
         <Show when={loginError().length > 0}>{loginError()}</Show>
-
       </form>
+
+      <Show when={isForLogin()}>
+        <p>
+          Forgot your password? No problem, <A href="/forgot-password">click here</A> to get an email with
+          instructions on how to reset your Password.
+        </p>
+      </Show>
     </div>
   );
 }
