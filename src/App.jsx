@@ -1,5 +1,6 @@
 import { Routes, Route } from '@solidjs/router';
 import { SignInSignUp } from './pages/SignInSignUp/SignInSignUp.jsx';
+import { ForgotPassword } from './pages/ForgotPassword/ForgotPassword.jsx';
 import { AddTime } from './pages/AddTime/AddTime.jsx';
 import { Header } from './components/Header/Header.jsx';
 import { RouteGuard } from './components/RouteGuard/RouteGuard.jsx';
@@ -13,6 +14,7 @@ function App() {
 
       <Routes>
         <Route path='/login' component={SignInSignUp} />
+        <Route path='/forgot-password' component={ForgotPassword} />
         <Route path='/' component={RouteGuard}>
           <Route path='/' component={AddTime} />
         </Route>
