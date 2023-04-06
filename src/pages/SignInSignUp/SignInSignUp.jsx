@@ -1,6 +1,8 @@
-import { createFormGroup, createFormControl } from 'solid-forms'; // eslint-disable-line import/no-extraneous-dependencies
+import { createFormGroup, createFormControl } from 'solid-forms';
 
-import { TextInput } from '../TextInput/TextInput.jsx';
+import { TextInput } from '../../components/TextInput/TextInput.jsx';
+import { Button } from '../../components/Button/Button.jsx';
+
 import { fbSignUpUser } from '../../firebase';
 import { isValidMail } from '../../helpers/validators';
 
@@ -56,11 +58,11 @@ function SignInSignUp() {
           control={group.controls.password}
         />
 
-        <button disabled={!group.isValid} type="submit">Signup</button>
+        <Button disabled={!group.isValid} type="submit" text="Sign Up" />
 
       </form>
     </div>
   );
 }
 
-export default SignInSignUp;
+export { SignInSignUp };
