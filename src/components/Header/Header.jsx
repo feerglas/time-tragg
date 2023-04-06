@@ -1,8 +1,25 @@
 import { A, useNavigate } from '@solidjs/router';
-import { createEffect, createSignal, Show } from 'solid-js';
+import {
+  createEffect, createSignal, Show, For,
+} from 'solid-js';
 
 import { fbLogoutUser, fbGetLoginState } from '../../firebase';
 import styles from './Header.module.css';
+
+const navLinks = [
+  {
+    href: '/add',
+    title: 'Add',
+  },
+  {
+    href: '/list',
+    title: 'List',
+  },
+  {
+    href: '/summary',
+    title: 'Summary',
+  },
+];
 
 function Header() {
   const navigate = useNavigate();
@@ -29,15 +46,14 @@ function Header() {
   return (
     <Show when={loggedIn()}>
       <ul>
-        <li>
-          <A activeClass={styles['item--active']} href="/add">add</A>
-        </li>
-        <li>
-          <A activeClass={styles['item--active']} href="/list">list</A>
-        </li>
-        <li>
-          <A activeClass={styles['item--active']} href="/summary">summary</A>
-        </li>
+        <For each={navLinks}>
+          {(link) => (
+            <li>
+              <A activeClass={styles['item--active']} href={link.href}>{link.title}</A>
+            </li>
+          )
+          }
+        </For>
         <li>
           <a href="#" onClick={handleLogout}>Logout</a>
         </li>
