@@ -1,20 +1,20 @@
 import { Outlet, useNavigate } from '@solidjs/router';
 import { createEffect } from 'solid-js';
-import { Header } from '../Header/Header.jsx';
+import { fbGetLoginState } from '../../firebase';
 
 function RouteGuard() {
   const navigate = useNavigate();
-  const auth = false;
 
   createEffect(() => {
-    if (!auth) {
-      navigate('/signup', { replace: true });
-    }
+    fbGetLoginState((uid) => {
+      if (!uid) {
+        navigate('/login', { replace: true });
+      }
+    });
   });
 
   return (
     <>
-      <Header />
       <Outlet />
     </>
   );
