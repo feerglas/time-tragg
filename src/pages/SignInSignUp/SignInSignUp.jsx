@@ -1,11 +1,12 @@
 import { createSignal, Show } from 'solid-js';
 import { createFormGroup, createFormControl } from 'solid-forms';
+import { useNavigate } from '@solidjs/router';
 
 import { TextInput } from '../../components/TextInput/TextInput.jsx';
 import { Button } from '../../components/Button/Button.jsx';
 import { RadioGroup } from '../../components/RadioGroup/RadioGroup.jsx';
 
-import { fbSignUpUser, fbSignInUser, fbGetLoginState } from '../../firebase';
+import { fbSignUpUser, fbSignInUser } from '../../firebase';
 import { isValidMail } from '../../helpers/validators';
 
 const radios = [
@@ -23,10 +24,13 @@ const radios = [
 ];
 
 function SignInSignUp() {
-  const lengthValidator = (rawValue) => (!rawValue || rawValue.length < 6 ? { isMissing: true, message: 'password must have at least 6 characters' } : null);
-  const mailValidator = (rawValue) => (!isValidMail(rawValue) ? { isMissing: true, message: 'this is not a valid email address' } : null);
+  const navigate = useNavigate();
+
   const [isForLogin, setIsForLogin] = createSignal(true);
   const [loginError, setLoginError] = createSignal('');
+
+  const lengthValidator = (rawValue) => (!rawValue || rawValue.length < 6 ? { isMissing: true, message: 'password must have at least 6 characters' } : null);
+  const mailValidator = (rawValue) => (!isValidMail(rawValue) ? { isMissing: true, message: 'this is not a valid email address' } : null);
 
   const group = createFormGroup({
     password: createFormControl('', {
@@ -48,19 +52,13 @@ function SignInSignUp() {
     const { email, password } = group.value;
 
     try {
-      let signupResult;
-
       if (isForLogin()) {
-        signupResult = await fbSignInUser(email, password);
+        await fbSignInUser(email, password);
       } else {
-        signupResult = await fbSignUpUser(email, password);
+        await fbSignUpUser(email, password);
       }
 
-      console.log(signupResult.user);
-
-      fbGetLoginState((uid) => {
-        console.log(uid);
-      });
+      navigate('/', { replace: true });
     } catch (err) {
       if (isForLogin()) {
         if (err.message === 'auth/user-not-found' || err.message === 'auth/wrong-password') {
@@ -78,7 +76,7 @@ function SignInSignUp() {
     }
   };
 
-  const handleChange = (value) => {
+  const handleRadioChange = (value) => {
     setIsForLogin(value === 'login');
     setLoginError('');
   };
@@ -92,7 +90,7 @@ function SignInSignUp() {
         <RadioGroup
           name='signInSignUp'
           radios={radios}
-          handleChange={handleChange}
+          handleChange={handleRadioChange}
         />
 
         <TextInput
