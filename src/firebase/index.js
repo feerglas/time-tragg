@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { firebaseConfig } from './config';
 
@@ -39,4 +40,15 @@ export const fbGetLoginState = (cb) => {
   onAuthStateChanged(auth, (user) => {
     cb(user);
   });
+};
+
+// Send a password resest mail
+export const fbSendPasswordResetMail = async (mail) => {
+  try {
+    const auth = getAuth();
+
+    return await sendPasswordResetEmail(auth, mail);
+  } catch (error) {
+    throw new Error(error);
+  }
 };
