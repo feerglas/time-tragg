@@ -15,6 +15,11 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'lines-around-comment': 'error',
     'padded-blocks': 'off',
+    'import/no-extraneous-dependencies': [
+      'error', {
+        devDependencies: true,
+      },
+    ],
     'padding-line-between-statements': [
       'error',
       {
