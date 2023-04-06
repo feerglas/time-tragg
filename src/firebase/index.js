@@ -31,20 +31,9 @@ export const fbSignInUser = async (email, password) => {
 
 // Get current login state
 export const fbGetLoginState = (cb) => {
-  try {
-    const auth = getAuth();
+  const auth = getAuth();
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        cb(user.uid);
-
-        return;
-      }
-
-      throw new Error('unable to get user info');
-    });
-
-  } catch (error) {
-    throw new Error(error.code);
-  }
+  onAuthStateChanged(auth, (user) => {
+    cb(user);
+  });
 };
