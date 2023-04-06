@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  signOut,
 } from 'firebase/auth';
 import { firebaseConfig } from './config';
 
@@ -51,4 +52,11 @@ export const fbSendPasswordResetMail = async (mail) => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+// Logout current user
+export const fbLogoutUser = async () => {
+  const auth = getAuth();
+
+  await signOut(auth);
 };
