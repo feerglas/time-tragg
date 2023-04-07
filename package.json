@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@solidjs/router": "^0.8.2",
+    "air-datepicker": "^3.3.5",
     "firebase": "^9.19.1",
     "solid-forms": "^0.4.8",
     "solid-js": "^1.6.10"
