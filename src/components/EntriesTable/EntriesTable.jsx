@@ -8,7 +8,7 @@ import { dbKeys } from '../../firebase/keys';
 import { getDayForDisplay, getDateForDisplay } from '../../helpers/dateTime';
 
 const config = {
-  itemsPerPage: 5,
+  itemsPerPage: 50,
 };
 
 function EntriesTable(props) {
