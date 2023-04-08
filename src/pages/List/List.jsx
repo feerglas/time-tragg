@@ -1,15 +1,9 @@
-import {
-  createResource, For, createSignal,
-} from 'solid-js';
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Table } from 'solid-bootstrap';
+import { createResource, createSignal } from 'solid-js';
 import { getAllEntries, deleteEntry } from '../../firebase/db';
 import { useUid } from '../../components/UidProvider/UidProvider.jsx';
-import { dbKeys } from '../../firebase/keys';
-import { Button } from '../../components/Button/Button.jsx';
 import { Modal } from '../../components/Modal/Modal.jsx';
 import { Alert } from '../../components/Alert/Alert.jsx';
+import { EntriesTable } from '../../components/EntriesTable/EntriesTable.jsx';
 
 function List() {
   const [uid] = useUid();
@@ -62,33 +56,13 @@ function List() {
         handleConfirm={handleDeleteConfirm}
         show={showModal}
       />
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Duration</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          <For each={entries()}>
-            {(entry) => (
-              <tr>
-                <td>{entry[dbKeys.date]}</td>
-                <td>{entry[dbKeys.startTime]} - {entry[dbKeys.endTime]}</td>
-                <td>
-                  <Button
-                    text="delete"
-                    onClick={() => {
-                      handleDelete(entry.id);
-                    }}
-                  />
-                </td>
-              </tr>
-            )}
-          </For>
-        </tbody>
-      </Table>
+
+      <EntriesTable
+        entries={entries}
+        handleDelete={(id) => {
+          handleDelete(id);
+        }}
+      />
     </div>
   );
 }
