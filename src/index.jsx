@@ -4,6 +4,7 @@ import { Router } from '@solidjs/router';
 
 import './index.css';
 import App from './App.jsx';
+import { UidProvider } from './components/UidProvider/UidProvider.jsx';
 
 const root = document.getElementById('root');
 
@@ -16,7 +17,9 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 render(
   () => (
     <Router>
-      <App />
+      <UidProvider uid={false}>
+        <App />
+      </UidProvider>
     </Router>
   ),
   root,
