@@ -11,15 +11,22 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const dbRef = ref(database);
 
-const getAllEntries = async (uid) => {
+const sortEntries = (entries) => entries.sort((a, b) => b[dbKeys.sortDate] - a[dbKeys.sortDate]);
+
+export const getAllEntries = async (uid) => {
   try {
     const snapshot = await get(child(dbRef, `${uid}/${dbKeys.workouts}`));
 
     if (snapshot.exists()) {
-      return snapshot.val();
+      const result = snapshot.val();
+      const resultArray = arrayifyFirebaseObject(result);
+      const sortedResults = sortEntries(resultArray);
+
+      return sortedResults;
     }
 
-    throw new Error('Error in getAllEntries');
+    return [];
+
   } catch (error) {
     throw new Error(error);
   }
@@ -27,10 +34,9 @@ const getAllEntries = async (uid) => {
 
 const getAllEntriesForDateRange = async (uid, from, to) => {
   const allEntries = await getAllEntries(uid);
-  const allEntriesArray = arrayifyFirebaseObject(allEntries);
   const fromFormatted = formatDateStringForDateComparison(from);
   const toFormatted = formatDateStringForDateComparison(to);
-  const filteredEntries = allEntriesArray.filter((item) => {
+  const filteredEntries = allEntries.filter((item) => {
     const entryDate = new Date(item[dbKeys.date]);
     const entryDateFormatted = formatDateStringForDateComparison(entryDate);
 
