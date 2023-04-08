@@ -69,12 +69,12 @@ function DateTimePicker(props) {
 
   const prepareReturnObject = (from, to) => {
     const correctDate = new Date(selectedDate().date);
-    const sortDate = correctDate.getTime();
-
-    correctDate.setHours(selectedDate().startTime.getHours());
-    correctDate.setMinutes(selectedDate().endTime.getMinutes());
-
     const returnObject = {};
+
+    correctDate.setHours(from.substring(0, 2));
+    correctDate.setMinutes(from.substring(2));
+
+    const sortDate = correctDate.getTime();
 
     returnObject[dbKeys.date] = correctDate.toISOString();
     returnObject[dbKeys.sortDate] = sortDate;
