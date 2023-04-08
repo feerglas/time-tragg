@@ -6,7 +6,7 @@ import { TextInput } from '../../components/TextInput/TextInput.jsx';
 import { Button } from '../../components/Button/Button.jsx';
 import { RadioGroup } from '../../components/RadioGroup/RadioGroup.jsx';
 
-import { fbSignUpUser, fbSignInUser } from '../../firebase';
+import { fbSignUpUser, fbSignInUser } from '../../firebase/auth';
 import { isValidMail } from '../../helpers/validators';
 
 const radios = [

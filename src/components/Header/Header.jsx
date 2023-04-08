@@ -3,7 +3,7 @@ import {
   createEffect, createSignal, Show, For,
 } from 'solid-js';
 
-import { fbLogoutUser, fbGetLoginState } from '../../firebase';
+import { fbLogoutUser, fbGetLoginState } from '../../firebase/auth';
 import styles from './Header.module.css';
 
 const navLinks = [

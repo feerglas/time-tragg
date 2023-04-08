@@ -6,7 +6,7 @@ import { TextInput } from '../../components/TextInput/TextInput.jsx';
 import { Button } from '../../components/Button/Button.jsx';
 
 import { isValidMail } from '../../helpers/validators';
-import { fbSendPasswordResetMail } from '../../firebase';
+import { fbSendPasswordResetMail } from '../../firebase/auth';
 
 function ForgotPassword() {
   const [sendError, setSendError] = createSignal('');
