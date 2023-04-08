@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import {
-  getDatabase, ref, child, push, update, get,
+  getDatabase, ref, child, push, update, get, remove,
 } from 'firebase/database';
 import { firebaseConfig } from './config';
 import { dbKeys } from './keys';
@@ -102,4 +102,10 @@ export const addEntry = async (uid, data) => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+export const deleteEntry = async (uid, id) => {
+  const refToDelete = ref(database, `${uid}/${dbKeys.workouts}/${id}`);
+
+  await remove(refToDelete);
 };
