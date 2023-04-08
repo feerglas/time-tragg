@@ -29,17 +29,6 @@ export const getDateForDisplay = (date) => {
   return formattedDate;
 };
 
-// returns a date in the format 28.1.23
-export const formatDateStringForDateComparison = (date) => {
-  const options = {
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-  };
-
-  return (new Date(date)).toLocaleDateString('de-DE', options);
-};
-
 export const removeColonsFromTime = (time) => time.split(':').join('');
 
 export const getDateTimePickerDefaults = () => {
