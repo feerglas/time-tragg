@@ -15,6 +15,8 @@ import {
 
 import { formattedTimeStringFromDate, getDateTimePickerDefaults } from '../../helpers/dateTime';
 
+import { dbKeys } from '../../firebase/keys';
+
 import './DateTimePicker.airpicker.css';
 
 const ids = {
@@ -37,8 +39,8 @@ function DateTimePicker(props) {
   const [validSelection, setValidSelection] = createSignal(true);
   const [selectedDate, setSelectedDate] = createSignal({
     date: defaults[0],
-    from: defaults[1],
-    to: defaults[2],
+    startTime: defaults[1],
+    endTime: defaults[2],
   });
 
   const handleDateSelect = (evt) => {
@@ -53,7 +55,7 @@ function DateTimePicker(props) {
     setValidSelection(true);
     setSelectedDate({
       ...selectedDate(),
-      from: evt.date,
+      startTime: evt.date,
     });
   };
 
@@ -61,28 +63,36 @@ function DateTimePicker(props) {
     setValidSelection(true);
     setSelectedDate({
       ...selectedDate(),
-      to: evt.date,
+      endTime: evt.date,
     });
   };
 
+  const prepareReturnObject = (from, to) => {
+    const correctDate = new Date(selectedDate().date);
+    const sortDate = correctDate.getTime();
+
+    correctDate.setHours(selectedDate().startTime.getHours());
+    correctDate.setMinutes(selectedDate().endTime.getMinutes());
+
+    const returnObject = {};
+
+    returnObject[dbKeys.date] = correctDate.toISOString();
+    returnObject[dbKeys.sortDate] = sortDate;
+    returnObject[dbKeys.startTime] = `${from.substring(0, 2)}:${from.substring(2)}`;
+    returnObject[dbKeys.endTime] = `${to.substring(0, 2)}:${to.substring(2)}`;
+
+    return returnObject;
+  };
+
   createEffect(() => {
-    const from = formattedTimeStringFromDate(selectedDate().from);
-    const to = formattedTimeStringFromDate(selectedDate().to);
+    const from = formattedTimeStringFromDate(selectedDate().startTime);
+    const to = formattedTimeStringFromDate(selectedDate().endTime);
     const isValid = validateTime(from, to);
 
     if (isValid) {
-      const correctDate = new Date(selectedDate().date);
-      const sortDate = correctDate.getTime();
+      const entryObject = prepareReturnObject(from, to);
 
-      correctDate.setHours(selectedDate().from.getHours());
-      correctDate.setMinutes(selectedDate().from.getMinutes());
-
-      props.handleSelect({
-        date: correctDate,
-        sortDate,
-        from: `${from}`,
-        to: `${to}`,
-      });
+      props.handleSelect(entryObject);
     } else {
       setValidSelection(false);
       props.handleSelect(false);
@@ -116,9 +126,11 @@ function DateTimePicker(props) {
   };
 
   onMount(() => {
-    new AirDatepicker(`#${ids.datepicker}`, datePickerOptions); // eslint-disable-line no-new
-    new AirDatepicker(`#${ids.timepickerFrom}`, timePickerOptionsFrom); // eslint-disable-line no-new
-    new AirDatepicker(`#${ids.timepickerTo}`, timePickerOptionsTo); // eslint-disable-line no-new
+    /* eslint-disable no-new */
+    new AirDatepicker(`#${ids.datepicker}`, datePickerOptions);
+    new AirDatepicker(`#${ids.timepickerFrom}`, timePickerOptionsFrom);
+    new AirDatepicker(`#${ids.timepickerTo}`, timePickerOptionsTo);
+    /* eslint-enable no-new */
   });
 
   return (
