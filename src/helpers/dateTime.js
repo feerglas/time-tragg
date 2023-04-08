@@ -7,7 +7,29 @@ export const formattedTimeStringFromDate = (date) => {
   return `${hours}${minutes}`;
 };
 
-// returns a date in the format 20230128
+export const getDayForDisplay = (date) => {
+  const options = {
+    weekday: 'long',
+  };
+
+  const formattedDate = (new Date(date)).toLocaleString('de-DE', options);
+
+  return formattedDate;
+};
+
+export const getDateForDisplay = (date) => {
+  const options = {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+  };
+
+  const formattedDate = (new Date(date)).toLocaleString('de-DE', options);
+
+  return formattedDate;
+};
+
+// returns a date in the format 28.1.23
 export const formatDateStringForDateComparison = (date) => {
   const options = {
     year: '2-digit',
