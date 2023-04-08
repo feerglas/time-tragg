@@ -11,6 +11,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['solid'],
+  ignorePatterns: ['/src/serviceWorker.js'],
   rules: {
     'import/prefer-default-export': 'off',
     'lines-around-comment': 'error',
