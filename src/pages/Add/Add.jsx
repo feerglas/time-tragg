@@ -26,11 +26,9 @@ function Add() {
         await addEntry(uid(), selection());
         navigate('/list');
       } catch (err) {
-        console.log(err.message);
         setSubmitError(err.message);
       }
     }
-
   };
 
   return (
