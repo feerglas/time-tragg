@@ -5,4 +5,5 @@ export const firebaseConfig = {
   storageBucket: 'time-tragg.appspot.com',
   messagingSenderId: '787248463146',
   appId: '1:787248463146:web:beb0e39e80997970163253',
+  databaseURL: 'https://time-tragg-default-rtdb.europe-west1.firebasedatabase.app/',
 };
