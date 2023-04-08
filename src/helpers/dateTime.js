@@ -7,6 +7,19 @@ export const formattedTimeStringFromDate = (date) => {
   return `${hours}${minutes}`;
 };
 
+// returns a date in the format 20230128
+export const formatDateStringForDateComparison = (date) => {
+  const options = {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+  };
+
+  return (new Date(date)).toLocaleDateString('de-DE', options);
+};
+
+export const removeColonsFromTime = (time) => time.split(':').join('');
+
 export const getDateTimePickerDefaults = () => {
   const defaults = {
     hourFrom: '13',
