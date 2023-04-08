@@ -11,11 +11,7 @@
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log"
-      ],
-      "rewrites": [{
-        "source": "**",
-        "destination": "/index.html"
-      }]
+      ]
     }
   ],
   "hosting": {
@@ -24,6 +20,10 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites": [{
+      "source": "**",
+      "destination": "/index.html"
+    }]
   }
 }
