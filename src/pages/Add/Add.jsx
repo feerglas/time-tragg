@@ -1,16 +1,36 @@
-import { createSignal, createEffect } from 'solid-js';
+import { createSignal, createEffect, Show } from 'solid-js';
+import { useNavigate } from '@solidjs/router';
 import { Button } from '../../components/Button/Button.jsx';
 import { DateTimePicker } from '../../components/DateTimePicker/DateTimePicker.jsx';
+import { addEntry } from '../../firebase/db';
+import { useUid } from '../../components/UidProvider/UidProvider.jsx';
 
 function Add() {
+  const navigate = useNavigate();
   const [selection, setSelection] = createSignal({});
+  const [submitError, setSubmitError] = createSignal();
+  const [uid] = useUid();
 
   createEffect(() => {
-    console.log(selection());
+    if (selection()) {
+      setSubmitError();
+    }
   });
 
   const onSubmit = async (evt) => {
     evt.preventDefault();
+    setSubmitError();
+
+    if (uid()) {
+      try {
+        await addEntry(uid(), selection());
+        navigate('/list');
+      } catch (err) {
+        console.log(err.message);
+        setSubmitError(err.message);
+      }
+    }
+
   };
 
   return (
@@ -28,6 +48,10 @@ function Add() {
           disabled={!selection()}
         />
       </form>
+
+      <Show when={submitError()}>
+        <p>{submitError()}</p>
+      </Show>
 
     </div>
   );
