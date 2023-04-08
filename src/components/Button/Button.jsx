@@ -3,7 +3,11 @@ export function Button(props) {
     <button
       disabled={props.disabled}
       type={props.type}
-      onClick={() => props.onClick()}
+      onClick={() => {
+        if (props.onClick) {
+          props.onClick();
+        }
+      }}
     >{props.text}</button>
   );
 }
