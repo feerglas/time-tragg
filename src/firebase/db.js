@@ -5,7 +5,7 @@ import {
 import { firebaseConfig } from './config';
 import { dbKeys } from './keys';
 import { arrayifyFirebaseObject } from '../helpers/dataTransform';
-import { formatDateStringForDateComparison, removeColonsFromTime } from '../helpers/dateTime';
+import { removeColonsFromTime } from '../helpers/dateTime';
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
@@ -32,13 +32,13 @@ export const getAllEntries = async (uid) => {
   }
 };
 
-const getAllEntriesForDateRange = async (uid, from, to) => {
-  const allEntries = await getAllEntries(uid);
-  const fromFormatted = formatDateStringForDateComparison(from);
-  const toFormatted = formatDateStringForDateComparison(to);
+export const getAllEntriesForDateRange = (allEntries, from, to) => {
+  const fromFormatted = new Date(from);
+  const toFormatted = new Date(to);
+
   const filteredEntries = allEntries.filter((item) => {
     const entryDate = new Date(item[dbKeys.date]);
-    const entryDateFormatted = formatDateStringForDateComparison(entryDate);
+    const entryDateFormatted = new Date(entryDate);
 
     return entryDateFormatted <= toFormatted && entryDateFormatted >= fromFormatted;
   });
@@ -48,7 +48,8 @@ const getAllEntriesForDateRange = async (uid, from, to) => {
 
 const entryAlreadyThere = async (entry, uid) => {
   const date = entry[dbKeys.date];
-  const entriesForDate = await getAllEntriesForDateRange(uid, date, date);
+  const allEntries = await getAllEntries(uid);
+  const entriesForDate = getAllEntriesForDateRange(allEntries, date, date);
 
   if (entriesForDate.length === 0) {
     return false;
