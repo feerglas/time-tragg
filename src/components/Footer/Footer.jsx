@@ -18,7 +18,7 @@ function Footer() {
   return (
     <div class={styles.footer}>
       <Show when={email}>
-        <span>{email()}</span>
+        <span class={styles.mail}>{email()}</span>
       </Show>
       <Show when={uid()}>
         <a class={styles.link} href="#" onClick={handleLogout}>

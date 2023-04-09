@@ -2,9 +2,17 @@
 
 .footer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   background-color: $header-background;
+  padding: $footer-padding-top 0;
+}
+
+.mail {
+  display: block;
+  width: 100%;
+  text-align: center;
 }
 
 .link {
