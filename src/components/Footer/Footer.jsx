@@ -7,7 +7,7 @@ import styles from './Footer.module.scss';
 
 function Footer() {
   const navigate = useNavigate();
-  const [uid] = useUid();
+  const [uid, email] = useUid();
 
   const handleLogout = async (evt) => {
     evt.preventDefault();
@@ -17,6 +17,9 @@ function Footer() {
 
   return (
     <div class={styles.footer}>
+      <Show when={email}>
+        <span>{email()}</span>
+      </Show>
       <Show when={uid()}>
         <a class={styles.link} href="#" onClick={handleLogout}>
           <Icon classes={styles.icon} name='logout' />
