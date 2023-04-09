@@ -1,9 +1,7 @@
-import { A, useNavigate } from '@solidjs/router';
-import {
-  createEffect, createSignal, Show, For,
-} from 'solid-js';
+import { A } from '@solidjs/router';
+import { Show, For } from 'solid-js';
 
-import { fbLogoutUser, fbGetLoginState } from '../../firebase/auth';
+import { useUid } from '../UidProvider/UidProvider.jsx';
 import styles from './Header.module.css';
 
 const navLinks = [
@@ -22,29 +20,10 @@ const navLinks = [
 ];
 
 function Header() {
-  const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = createSignal(true);
-
-  createEffect(() => {
-    fbGetLoginState((uid) => {
-      if (!uid) {
-        setLoggedIn(false);
-      } else {
-        setLoggedIn(true);
-      }
-    });
-  });
-
-  const handleLogout = async (evt) => {
-    evt.preventDefault();
-
-    await fbLogoutUser();
-
-    navigate('/login', { replace: true });
-  };
+  const [uid] = useUid();
 
   return (
-    <Show when={loggedIn()}>
+    <Show when={uid()}>
       <ul>
         <For each={navLinks}>
           {(link) => (
@@ -54,9 +33,6 @@ function Header() {
           )
           }
         </For>
-        <li>
-          <a href="#" onClick={handleLogout}>Logout</a>
-        </li>
       </ul >
     </Show>
   );
