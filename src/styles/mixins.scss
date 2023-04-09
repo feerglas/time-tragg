@@ -1,0 +1,19 @@
+@mixin nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $header-height;
+  color: $header-color;
+  padding: 0 $header-list-item-horizontal-padding;
+
+  &:hover {
+    color: $header-color-hover;
+    background-color: $header-background-hover;
+  }
+}
+
+@mixin page-title {
+  padding: 0;
+  margin: 0 0 $page-title-margin-bottom 0;
+  font-size: $page-title-font-size;
+}
