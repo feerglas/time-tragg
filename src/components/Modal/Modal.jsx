@@ -17,8 +17,16 @@ function Modal(props) {
         </p>
       </BootstrapModal.Body>
       <BootstrapModal.Footer>
-        <Button onClick={props.handleCancel} text={props.cancelText} />
-        <Button onClick={props.handleConfirm} text={props.confirmText} />
+        <Button
+          onClick={props.handleCancel}
+          text={props.cancelText}
+          variant="secondary"
+        />
+        <Button
+          onClick={props.handleConfirm}
+          text={props.confirmText}
+          variant="danger"
+        />
       </BootstrapModal.Footer>
     </BootstrapModal>
   );
