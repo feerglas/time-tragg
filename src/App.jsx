@@ -5,6 +5,7 @@ import { Add } from './pages/Add/Add.jsx';
 import { List } from './pages/List/List.jsx';
 import { Summary } from './pages/Summary/Summary.jsx';
 import { Header } from './components/Header/Header.jsx';
+import { Footer } from './components/Footer/Footer.jsx';
 
 import styles from './App.module.css';
 
@@ -21,6 +22,8 @@ function App() {
         <Route path='/summary' component={Summary} />
         <Route path="*" element={() => <div>Page not found</div>} />
       </Routes>
+
+      <Footer />
     </div>
   );
 }
