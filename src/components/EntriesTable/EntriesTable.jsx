@@ -4,6 +4,7 @@ import {
   For, createEffect, createSignal, createMemo, Show,
 } from 'solid-js';
 import { Button } from '../Button/Button.jsx';
+import { Icon } from '../Icon/Icon.jsx';
 import { dbKeys } from '../../firebase/keys';
 import { getDayForDisplay, getDateForDisplay } from '../../helpers/dateTime';
 
@@ -106,8 +107,9 @@ function EntriesTable(props) {
                 </td>
                 <td>
                   <Button
-                    text="delete"
+                    variant="outline-danger"
                     onClick={props.handleDelete(entry.id)}
+                    icon={<Icon name="delete" />}
                   />
                 </td>
               </tr>
