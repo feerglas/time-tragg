@@ -5,6 +5,7 @@ import { useNavigate, A } from '@solidjs/router';
 import { TextInput } from '../../components/TextInput/TextInput.jsx';
 import { Button } from '../../components/Button/Button.jsx';
 import { RadioGroup } from '../../components/RadioGroup/RadioGroup.jsx';
+import { PageTitle } from '../../components/PageTitle/PageTitle.jsx';
 
 import { fbSignUpUser, fbSignInUser } from '../../firebase/auth';
 import { isValidMail } from '../../helpers/validators';
@@ -83,7 +84,7 @@ function SignInSignUp() {
 
   return (
     <div>
-      <h1>Login / Signup</h1>
+      <PageTitle text="Login / Signup" />
 
       <form onSubmit={onSubmit}>
 

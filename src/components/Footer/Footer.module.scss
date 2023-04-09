@@ -1,0 +1,23 @@
+@import "../../styles/globals.scss";
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $header-background;
+}
+
+.link {
+  @include nav-link;
+}
+
+.icon {
+  display: block;
+  margin-right: $footer-icon-margin;
+  width: $footer-icon-size;
+  height: $footer-icon-size;
+}
+
+.text {
+  line-height: $footer-icon-size;
+}

@@ -4,6 +4,7 @@ import { createFormGroup, createFormControl } from 'solid-forms';
 
 import { TextInput } from '../../components/TextInput/TextInput.jsx';
 import { Button } from '../../components/Button/Button.jsx';
+import { PageTitle } from '../../components/PageTitle/PageTitle.jsx';
 
 import { isValidMail } from '../../helpers/validators';
 import { fbSendPasswordResetMail } from '../../firebase/auth';
@@ -41,6 +42,7 @@ function ForgotPassword() {
 
   return (
     <div>
+      <PageTitle text="Reset password" />
       <form onSubmit={onSubmit}>
         <TextInput
           name="email"

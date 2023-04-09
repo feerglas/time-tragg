@@ -1,21 +1,22 @@
 import { A } from '@solidjs/router';
 import { Show, For } from 'solid-js';
 
+import { Icon } from '../Icon/Icon.jsx';
 import { useUid } from '../UidProvider/UidProvider.jsx';
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 
 const navLinks = [
   {
     href: '/add',
-    title: 'Add',
+    icon: 'plus',
   },
   {
     href: '/list',
-    title: 'List',
+    icon: 'workouts',
   },
   {
     href: '/summary',
-    title: 'Summary',
+    icon: 'sum',
   },
 ];
 
@@ -24,11 +25,13 @@ function Header() {
 
   return (
     <Show when={uid()}>
-      <ul>
+      <ul class={styles.list}>
         <For each={navLinks}>
           {(link) => (
-            <li>
-              <A activeClass={styles['item--active']} href={link.href}>{link.title}</A>
+            <li class={styles.item}>
+              <A class={styles.link} activeClass={styles['link--active']} href={link.href}>
+                <Icon name={link.icon} />
+              </A>
             </li>
           )
           }

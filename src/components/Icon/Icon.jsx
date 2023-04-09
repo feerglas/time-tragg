@@ -1,7 +1,7 @@
 import {
   Match, Switch, createSignal, createEffect,
 } from 'solid-js';
-import styles from './Icon.module.css';
+import styles from './Icon.module.scss';
 
 function Icon(props) {
   const [classes, setClasses] = createSignal(styles['c-icon']);
@@ -36,7 +36,7 @@ function Icon(props) {
       <Match when={props.name === 'logout'}>
         <svg width='22px' height='23px' viewBox='0 0 22 23' class={classes()}><g strokeWidth='1' fill='none'><polyline points='13.5 18.5205 13.5 21.4995 0.5 21.4995 0.5 0.4995 13.5 0.4995 13.5 4.4995'></polyline><path d='M4.5,11.5 L21.5,11.5'></path><polyline points='16.5 6.4922 21.5 11.4922 16.5 16.4922'></polyline></g></svg>
       </Match>
-      <Match when={props.name === 'plus'}>
+      <Match when={props.name === 'plus2'}>
         <svg width='23px' height='23px' viewBox='0 0 23 23' class={classes()}><g strokeWidth='1' fill='none'><path d='M11.5,0.5 L11.5,22.5'></path><path d='M22.5,11.5 L0.5,11.5'></path></g></svg>
       </Match>
       <Match when={props.name === 'workouts'}>

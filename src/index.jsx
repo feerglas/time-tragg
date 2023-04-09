@@ -2,7 +2,7 @@
 import { render } from 'solid-js/web';
 import { Router } from '@solidjs/router';
 
-import './index.css';
+import './index.scss';
 import App from './App.jsx';
 import { UidProvider } from './components/UidProvider/UidProvider.jsx';
 
@@ -24,4 +24,3 @@ render(
   ),
   root,
 );
-

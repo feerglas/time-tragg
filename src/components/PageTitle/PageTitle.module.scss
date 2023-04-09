@@ -1,0 +1,5 @@
+@import '../../styles/globals.scss';
+
+.title {
+  @include page-title;
+}

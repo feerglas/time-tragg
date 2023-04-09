@@ -1,0 +1,23 @@
+@import "../../styles/globals.scss";
+
+.list {
+  list-style-type: none;
+  display: flex;
+  padding: 0 $header-list-padding-horizontal;
+  margin: 0;
+  background-color: $header-background;
+}
+
+.item {
+  display: block;
+}
+
+.link {
+  @include nav-link;
+}
+
+.link--active,
+.link:hover.link--active {
+  color: $header-color-active;
+  background-color: $header-background-active;
+}

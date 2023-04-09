@@ -3,6 +3,7 @@ import { Table as BootstrapTable } from 'solid-bootstrap';
 import { createResource, For, Show } from 'solid-js';
 import { getSummary } from './summary.data';
 import { useUid } from '../../components/UidProvider/UidProvider.jsx';
+import { PageTitle } from '../../components/PageTitle/PageTitle.jsx';
 
 function Summary() {
   const [uid] = useUid();
@@ -10,6 +11,7 @@ function Summary() {
 
   return (
     <div>
+      <PageTitle text="Summary" />
       <h2>total trainings</h2>
       <div>{data()?.totalTrainings}</div>
 

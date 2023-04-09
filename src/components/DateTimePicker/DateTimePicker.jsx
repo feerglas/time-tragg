@@ -17,7 +17,7 @@ import { formattedTimeStringFromDate, getDateTimePickerDefaults } from '../../he
 
 import { dbKeys } from '../../firebase/keys';
 
-import './DateTimePicker.airpicker.css';
+import './DateTimePicker.airpicker.scss';
 
 const ids = {
   datepicker: 'datepicker',

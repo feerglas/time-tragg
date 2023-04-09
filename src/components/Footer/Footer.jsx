@@ -2,6 +2,8 @@ import { useNavigate } from '@solidjs/router';
 import { Show } from 'solid-js';
 import { fbLogoutUser } from '../../firebase/auth';
 import { useUid } from '../UidProvider/UidProvider.jsx';
+import { Icon } from '../Icon/Icon.jsx';
+import styles from './Footer.module.scss';
 
 function Footer() {
   const navigate = useNavigate();
@@ -14,9 +16,12 @@ function Footer() {
   };
 
   return (
-    <div>
+    <div class={styles.footer}>
       <Show when={uid()}>
-        <a href="#" onClick={handleLogout}>Logout</a>
+        <a class={styles.link} href="#" onClick={handleLogout}>
+          <Icon classes={styles.icon} name='logout' />
+          <span class={styles.text}>Logout</span>
+        </a>
       </Show>
     </div>
   );
