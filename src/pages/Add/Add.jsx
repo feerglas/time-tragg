@@ -2,7 +2,6 @@ import { createSignal, createEffect, Show } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 import { Button } from '../../components/Button/Button.jsx';
 import { DateTimePicker } from '../../components/DateTimePicker/DateTimePicker.jsx';
-import { PageTitle } from '../../components/PageTitle/PageTitle.jsx';
 import { addEntry } from '../../firebase/db';
 import { useUid } from '../../components/UidProvider/UidProvider.jsx';
 
@@ -34,8 +33,6 @@ function Add() {
 
   return (
     <div>
-      <PageTitle text="Add entry" />
-
       <form onSubmit={onSubmit}>
         <DateTimePicker
           handleSelect={setSelection}
