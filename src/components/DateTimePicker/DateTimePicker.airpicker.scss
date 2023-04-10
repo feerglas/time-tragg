@@ -1,4 +1,109 @@
+@import "../../styles/globals.scss";
+
 .air-datepicker {
-  /* --adp-time-track-height: 8px;
-  --adp-time-thumb-size: 30px; */
- }
+  --adp-width: 100%;
+  color: $color-dark;
+}
+
+.air-datepicker.-inline- {
+  border: $time-range-container-boder;
+  border-radius: $time-range-container-border-radius;
+}
+
+.air-datepicker--time {
+  border: none;
+}
+
+.air-datepicker-time--row.air-datepicker-time--row {
+  margin-top: calc($time-range-slider-margin + $time-range-thumb-size / 2);
+  margin-bottom: $time-range-slider-vertical-item-margin;
+  height: calc($time-range-thumb-size + 2 * $time-range-slider-margin);
+}
+
+@mixin thumb {
+  height: $time-range-thumb-size;
+  width: $time-range-thumb-size;
+  border-radius: $time-range-thumb-border-radius;
+  border: $time-range-thumb-border;
+  background: $time-range-thumb-color;
+
+  transform: translateY(calc($time-range-initial-thumb-size + $time-range-track-height / 2 - $time-range-thumb-size / 2));
+}
+
+.air-datepicker-time--current-colon {
+  margin: 0 .125rem .25rem;
+  font-size: $time-range-slider-font-size;
+}
+
+.air-datepicker-time--current-hours,
+.air-datepicker-time--current-minutes {
+  font-size: $time-range-slider-font-size;
+  font-family: $font;
+
+  &:after {
+    content: none;
+  }
+
+}
+
+@mixin trackSelector {
+  &::-webkit-slider-runnable-track {
+    @content;
+  }
+
+  &::-moz-range-track {
+    @content;
+  }
+
+  &::-ms-track {
+    @content;
+  }
+}
+
+@mixin thumbSelector {
+  &::-webkit-slider-thumb {
+    @content;
+  }
+
+  &::-moz-range-thumb {
+    @content;
+  }
+
+  &::-ms-thumb {
+    @content;
+  }
+}
+
+@mixin track {
+  height: $time-range-track-height;
+}
+
+.air-datepicker-time--row {
+  background:
+    linear-gradient(to right,$time-range-track-color, $time-range-track-color)
+    left 50%/100% $time-range-track-height no-repeat;
+
+  input[type='range'] {
+    &:hover {
+      @include thumbSelector() {
+        border-color: $time-range-thumb-border-color-hover;
+      }
+    }
+
+    &:focus {
+      @include thumbSelector() {
+        background: $time-range-thumb-color-active;
+        border-color: $time-range-thumb-border-color-active;
+      }
+    }
+
+    @include thumbSelector() {
+      @include thumb;
+    }
+
+    @include trackSelector() {
+      @include track;
+    }
+
+  }
+}
