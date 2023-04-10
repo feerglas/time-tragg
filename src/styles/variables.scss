@@ -46,18 +46,20 @@ $page-title-margin-bottom: 1rem;
 $page-title-font-size: 2rem;
 
 $add-form-input-height: 3rem;
+$add-form-input-border: 1px solid $color-gray;
+$add-form-input-border-radius: 0.25rem;
 $add-form-input-padding: 1rem;
-$add-form-input-margin-bottom: 3rem;
-$add-form-slider-margin-bottom: 2rem;
+$add-form-input-margin-bottom: 2rem;
+$add-form-slider-margin-bottom: 1rem;
 $add-form-input-font-size: 1rem;
 
 $time-range-container-boder: 1px solid $color-gray;
-$time-range-container-border-radius: .5rem;
+$time-range-container-border-radius: $add-form-input-border-radius;
 $time-range-initial-thumb-size: 6px;
 $time-range-track-height: .25rem;
 $time-range-track-color: $color-gray;
 $time-range-thumb-size: 2rem;
-$time-range-thumb-border-radius: 0.25rem;
+$time-range-thumb-border-radius: $add-form-input-border-radius;
 $time-range-slider-margin: 0rem;
 $time-range-slider-font-size: $add-form-input-font-size;
 $time-range-slider-vertical-item-margin: 1rem;
