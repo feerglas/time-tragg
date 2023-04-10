@@ -19,6 +19,8 @@ import { dbKeys } from '../../firebase/keys';
 
 import './DateTimePicker.airpicker.scss';
 
+import styles from './DateTimePicker.module.scss';
+
 const ids = {
   datepicker: 'datepicker',
   timepickerFrom: 'timepicker-from',
@@ -135,11 +137,12 @@ function DateTimePicker(props) {
 
   return (
     <div>
-      <input id={ids.datepicker} />
-      <div id={ids.timepickerFrom} />
-      <div id={ids.timepickerTo} />
+      <input
+        id={ids.datepicker} class={styles.input} />
+      <div id={ids.timepickerFrom} class={styles.slider} />
+      <div id={ids.timepickerTo} class={styles.slider} />
       <Show when={!validSelection()}>
-        The end time should be later than the start time.
+        <p class={styles.error}>The end time should be later than the start time.</p>
       </Show>
     </div>
   );
