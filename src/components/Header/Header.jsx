@@ -24,8 +24,8 @@ function Header() {
   const [uid] = useUid();
 
   return (
-    <Show when={uid()}>
-      <ul class={styles.list}>
+    <ul class={styles.list}>
+      <Show when={uid()}>
         <For each={navLinks}>
           {(link) => (
             <li class={styles.item}>
@@ -36,8 +36,8 @@ function Header() {
           )
           }
         </For>
-      </ul >
-    </Show>
+      </Show>
+    </ul >
   );
 }
 
