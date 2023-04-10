@@ -1,0 +1,24 @@
+@import "../../styles/globals.scss";
+
+$add-form-input-height: 3rem;
+$add-form-input-padding: 1rem;
+$add-form-input-margin-bottom: 3rem;
+$add-form-slider-margin-bottom: 2rem;
+$add-form-input-font-size: 1rem;
+
+.input {
+  text-align: center;
+  width: 100%;
+  height: $add-form-input-height;
+  padding: $add-form-input-padding;
+  margin: 0 0 $add-form-input-margin-bottom 0;
+  font-size: $add-form-input-font-size;
+}
+
+.slider {
+  margin: 0 0 $add-form-slider-margin-bottom 0;
+}
+
+.error {
+  color: $color-danger;
+}
