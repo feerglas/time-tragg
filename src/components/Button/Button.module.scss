@@ -1,3 +1,6 @@
+@import "../../styles/globals.scss";
+
 .button {
   display: flex;
+  font-size: pxToRem($base-font-size);
 }
