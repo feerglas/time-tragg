@@ -1,4 +1,5 @@
 @import './styles/globals.scss';
+@import './styles/fonts.scss';
 
 html {
   font-size: calc($base-font-size * 1px);
@@ -8,6 +9,7 @@ body {
   color: $color-dark;
   margin: 0;
   font-family: $font;
+  font-weight: $font-weight-regular;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
