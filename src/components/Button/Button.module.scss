@@ -2,5 +2,6 @@
 
 .button {
   display: flex;
+  align-items: center;
   font-size: pxToRem($base-font-size);
 }
