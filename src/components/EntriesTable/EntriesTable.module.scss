@@ -1,0 +1,41 @@
+@import '../../styles/globals.scss';
+
+.table {
+  margin-bottom: $entries-table-margin-bottom;
+  border-color: $entries-table-border-color;
+}
+
+.table td,
+.table th {
+  padding: $entries-table-cell-padding;
+}
+
+.cell-date__date,
+.cell-duration__time {
+  display: block;
+  width: 100%;
+}
+
+.cell-date__day,
+.cell-duration__minutes {
+  color: $color-gray;
+  font-weight: $font-weight-light;
+}
+
+.cell-delete {
+  vertical-align: middle;
+}
+
+.cell-delete__button {
+  margin: 0 auto;
+  height: $entries-table-button-height;
+}
+
+.pagination {
+  display: flex;
+}
+
+.select {
+  margin: 0 $entries-pagination-select-horizontal-margin;
+  border-color: $entries-pagination-select-border-color;
+}

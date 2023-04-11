@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Table as BootstrapTable, Pagination, Form } from 'solid-bootstrap';
+import { Table as BootstrapTable, Form } from 'solid-bootstrap';
 import {
   For, createEffect, createSignal, createMemo, Show,
 } from 'solid-js';
@@ -7,12 +7,18 @@ import { Button } from '../Button/Button.jsx';
 import { Icon } from '../Icon/Icon.jsx';
 import { dbKeys } from '../../firebase/keys';
 import { getDayForDisplay, getDateForDisplay } from '../../helpers/dateTime';
+import { getMinuteDurationForEntry, getZeroStartAndEndDates } from '../../pages/Summary/summary.data';
+import styles from './EntriesTable.module.scss';
 
 const config = {
-  itemsPerPage: 50,
+  itemsPerPage: 20,
 };
 
 function EntriesTable(props) {
+  const {
+    startDate,
+    endDate,
+  } = getZeroStartAndEndDates();
   const [currentPage, setCurrentPage] = createSignal(0);
   const [currentItems, setCurrentItems] = createSignal([]);
   const totalPages = createMemo(() => {
@@ -42,6 +48,8 @@ function EntriesTable(props) {
     setCurrentItems(newItems);
   });
 
+  const getEntryDuration = (entry) => getMinuteDurationForEntry(startDate, endDate, entry);
+
   const handlePaginationSelect = (evt) => {
     const val = parseInt(evt.target.value, 10);
 
@@ -67,24 +75,12 @@ function EntriesTable(props) {
 
   return (
     <div>
-      <Show when={totalPages() > 0}>
-        <Pagination>
-          <Pagination.Prev onClick={handlePaginationPrevious} />
-          <Form.Select
-            onChange={handlePaginationSelect}
-            value={currentPage()}
-          >
-            <For each={[...Array(totalPages()).keys()]}>
-              {(page) => (
-                <option value={page}>{page + 1}</option>
-              )}
-            </For>
-          </Form.Select>
-          <Pagination.Next onClick={handlePaginationNext} />
-        </Pagination>
-      </Show>
-
-      <BootstrapTable striped bordered hover size="sm">
+      <BootstrapTable
+        striped
+        bordered
+        size="sm"
+        class={styles.table}
+      >
         <thead>
           <tr>
             <th>Date</th>
@@ -97,19 +93,23 @@ function EntriesTable(props) {
             {(entry) => (
               <tr>
                 <td>
-                  <span>{getDayForDisplay(entry[dbKeys.date])}</span>
-                  <span>{getDateForDisplay(entry[dbKeys.date])}</span>
+                  <span class={styles['cell-date__date']}>{getDateForDisplay(entry[dbKeys.date])}</span>
+                  <span class={styles['cell-date__day']}>{getDayForDisplay(entry[dbKeys.date])}</span>
                 </td>
                 <td>
-                  <span>{entry[dbKeys.startTime]}</span>
-                  <span>-</span>
-                  <span>{entry[dbKeys.endTime]}</span>
+                  <span class={styles['cell-duration__time']}>
+                    <span>{entry[dbKeys.startTime]}</span>
+                    <span>-</span>
+                    <span>{entry[dbKeys.endTime]}</span>
+                  </span>
+                  <span class={styles['cell-duration__minutes']}>{getEntryDuration(entry)}min</span>
                 </td>
-                <td>
+                <td class={styles['cell-delete']}>
                   <Button
                     variant="outline-danger"
                     onClick={props.handleDelete(entry.id)}
                     icon={<Icon name="delete" />}
+                    class={styles['cell-delete__button']}
                   />
                 </td>
               </tr>
@@ -117,6 +117,31 @@ function EntriesTable(props) {
           </For>
         </tbody>
       </BootstrapTable>
+      <Show when={totalPages() > 0}>
+        <div class={styles.pagination}>
+          <Button
+            onClick={handlePaginationPrevious}
+            variant="outline-primary"
+            icon={<Icon name="chevron-left" />}
+          />
+          <Form.Select
+            class={styles.select}
+            onChange={handlePaginationSelect}
+            value={currentPage()}
+          >
+            <For each={[...Array(totalPages()).keys()]}>
+              {(page) => (
+                <option value={page}>{page + 1}</option>
+              )}
+            </For>
+          </Form.Select>
+          <Button
+            onClick={handlePaginationNext}
+            variant="outline-primary"
+            icon={<Icon name="chevron-right" />}
+          />
+        </div>
+      </Show>
     </div>
   );
 }
