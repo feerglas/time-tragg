@@ -4,7 +4,6 @@ import { useUid } from '../../components/UidProvider/UidProvider.jsx';
 import { Modal } from '../../components/Modal/Modal.jsx';
 import { Alert } from '../../components/Alert/Alert.jsx';
 import { EntriesTable } from '../../components/EntriesTable/EntriesTable.jsx';
-import { PageTitle } from '../../components/PageTitle/PageTitle.jsx';
 
 function List() {
   const [uid] = useUid();
@@ -41,8 +40,6 @@ function List() {
 
   return (
     <div>
-      <PageTitle text="Entries" />
-
       <Alert
         title="Error"
         text="There was an error deleting the entry..."
