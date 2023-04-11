@@ -18,9 +18,10 @@ function App() {
         <Routes>
           <Route path='/login' component={SignInSignUp} />
           <Route path='/forgot-password' component={ForgotPassword} />
-          <Route path='/add' component={Add} />
           <Route path='/list' component={List} />
           <Route path='/summary' component={Summary} />
+          <Route path='/add' component={Add} />
+          <Route path='/' component={Add} />
           <Route path="*" element={() => <div>Page not found</div>} />
         </Routes>
       </div>
