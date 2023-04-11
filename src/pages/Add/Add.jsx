@@ -39,6 +39,7 @@ function Add() {
         />
 
         <Button
+          size="lg"
           type="submit"
           text="Save"
           disabled={!selection()}
