@@ -9,6 +9,7 @@ $color-green: #198754;
 $color-teal: #20c997;
 $color-cyan: #0dcaf0;
 $color-white: #fff;
+$color-gray-light: #dee2e6;
 $color-gray: #6c757d;
 $color-gray-dark: #343a40;
 $color-light: #f8f9fa;
@@ -21,7 +22,11 @@ $color-info: $color-cyan;
 $color-warning: $color-yellow;
 $color-danger: $color-red;
 
-$font: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+$font: 'Roboto Mono', SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 600;
+
 $gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
 
 $header-height: 3rem;
@@ -46,18 +51,18 @@ $page-title-margin-bottom: 1rem;
 $page-title-font-size: 2rem;
 
 $add-form-input-height: 3rem;
-$add-form-input-border: 1px solid $color-gray;
+$add-form-input-border: 1px solid $color-gray-light;
 $add-form-input-border-radius: 0.25rem;
 $add-form-input-padding: 1rem;
-$add-form-input-margin-bottom: 2rem;
+$add-form-input-margin-bottom: 1rem;
 $add-form-slider-margin-bottom: 1rem;
 $add-form-input-font-size: 1rem;
 
-$time-range-container-boder: 1px solid $color-gray;
+$time-range-container-boder: 1px solid $color-gray-light;
 $time-range-container-border-radius: $add-form-input-border-radius;
 $time-range-initial-thumb-size: 6px;
 $time-range-track-height: .25rem;
-$time-range-track-color: $color-gray;
+$time-range-track-color: $color-gray-dark;
 $time-range-thumb-size: 2rem;
 $time-range-thumb-border-radius: $add-form-input-border-radius;
 $time-range-slider-margin: 0rem;
@@ -68,3 +73,15 @@ $time-range-thumb-color-active: $color-success;
 $time-range-thumb-border: 2px solid $color-primary;
 $time-range-thumb-border-color-hover: $color-dark;
 $time-range-thumb-border-color-active: $color-dark;
+
+$entries-table-border-color: $color-gray-light;
+$entries-table-margin-bottom: 1rem;
+$entries-table-button-height: 2rem;
+$entries-table-cell-padding: .6rem;
+$entries-pagination-select-horizontal-margin: 1rem;
+$entries-pagination-select-border-color: $color-gray-light;
+
+$summary-margin-bottom: 2rem;
+$summary-table-border-color: $color-gray-light;
+$summary-table-cell-padding: .4rem .6rem;
+
