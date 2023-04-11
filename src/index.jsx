@@ -24,3 +24,7 @@ render(
   ),
   root,
 );
+
+if ('serviceWorker' in navigator) {
+  // navigator.serviceWorker.register('./sw.js');
+}
