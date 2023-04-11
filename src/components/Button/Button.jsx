@@ -12,10 +12,11 @@ export function Button(props) {
   return (
     <BootstrapButton
       variant={props.variant}
+      size={props.size}
       disabled={props.disabled}
       type={props.type}
       onClick={handleClick}
-      class={styles.button}
+      class={`${styles.button} ${props.class}`}
     >{props.text}{props.icon}</BootstrapButton>
   );
 }
