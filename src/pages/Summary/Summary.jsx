@@ -1,47 +1,91 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Table as BootstrapTable } from 'solid-bootstrap';
-import { createResource, For, Show } from 'solid-js';
+import {
+  createResource, For, Show, createMemo,
+} from 'solid-js';
 import { getSummary } from './summary.data';
 import { useUid } from '../../components/UidProvider/UidProvider.jsx';
-import { PageTitle } from '../../components/PageTitle/PageTitle.jsx';
+import styles from './Summary.module.scss';
 
 function Summary() {
   const [uid] = useUid();
   const [data] = createResource(uid, getSummary);
+  const summary = createMemo(() => {
+    const totalTrainings = data()?.totalTrainings || 0;
+    const totalTimeMin = data()?.totalTime.minutes || 0;
+    const totalTimeH = data()?.totalTime.hours || 0;
+    const totalTimeDays = data()?.totalTime.days || 0;
+    const totalTime = `${totalTimeMin} / ${totalTimeH} / ${totalTimeDays}`;
+    const averageMinPerWorkout = data()?.averageMinutesPerWorkout || 0;
+    const shortestVal = data()?.shortestWorkout.value || 0;
+    const shortestDate = data()?.shortestWorkout.date || '02.09.83';
+    const shortest = `${shortestVal} (${shortestDate})`;
+    const longestVal = data()?.longestWorkout.value || 0;
+    const longestDate = data()?.longestWorkout.date || '02.09.83';
+    const longest = `${longestVal} (${longestDate})`;
+    const averageWorkoutsPerWeek = data()?.averageWorkoutsPerWeek || 0;
+    const averageWorkoutsPerMonth = data()?.averageWorkoutsPerMonth || 0;
+
+    return [
+      {
+        description: 'Total trainings',
+        value: totalTrainings,
+      },
+      {
+        description: 'Total time',
+        value: totalTime,
+      },
+      {
+        description: 'average min per workout',
+        value: averageMinPerWorkout,
+      },
+      {
+        description: 'shortest',
+        value: shortest,
+      },
+      {
+        description: 'longest',
+        value: longest,
+      },
+      {
+        description: 'average workouts per week',
+        value: averageWorkoutsPerWeek,
+      },
+      {
+        description: 'average workouts per month',
+        value: averageWorkoutsPerMonth,
+      },
+    ];
+  });
 
   return (
     <div>
-      <PageTitle text="Summary" />
-      <h2>total trainings</h2>
-      <div>{data()?.totalTrainings}</div>
+      <BootstrapTable
+        striped
+        size="sm"
+        class={styles.summary}
+      >
+        <tbody>
+          <For each={summary()}>
+            {(item) => (
+              <tr>
+                <td>{item.description}</td>
+                <td class={styles.value}>{item.value}</td>
+              </tr>
+            )}
+          </For>
+        </tbody>
+      </BootstrapTable>
 
-      <h2>total time</h2>
-      <div>{data()?.totalTime.minutes}</div>
-      <div>{data()?.totalTime.hours}</div>
-      <div>{data()?.totalTime.days}</div>
-
-      <h2>average minutes per workout</h2>
-      <div>{data()?.averageMinutesPerWorkout}</div>
-
-      <h2>shortest</h2>
-      <div>{data()?.shortestWorkout.value}</div>
-      <div>{data()?.shortestWorkout.date}</div>
-
-      <h2>longest</h2>
-      <div>{data()?.longestWorkout.value}</div>
-      <div>{data()?.longestWorkout.date}</div>
-
-      <h2>average workouts per week</h2>
-      <div>{data()?.averageWorkoutsPerWeek}</div>
-
-      <h2>average workouts per month</h2>
-      <div>{data()?.averageWorkoutsPerMonth}</div>
-
-      <h2>months</h2>
-      <BootstrapTable striped bordered hover size="sm">
+      <BootstrapTable
+        striped
+        bordered
+        size="sm"
+        class={styles.months}
+      >
         <thead>
           <tr>
-            <th></th>
+            <th />
             <th>min</th>
             <th>min / max</th>
             <th>total</th>
@@ -53,8 +97,7 @@ function Summary() {
             {(entry) => (
               <tr>
                 <td>
-                  <span>{entry.monthName}</span>
-                  <span>{entry.year.toString().substring(2, 4)}</span>
+                  {entry.monthName.substring(0, 3)} {entry.year.toString().substring(2, 4)}
                 </td>
                 <td>
                   <Show

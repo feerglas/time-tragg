@@ -45,7 +45,7 @@ const arrayOfMonthsSinceFirstWorkout = (firstWorkout) => {
   return dates;
 };
 
-const getZeroStartAndEndDates = () => {
+export const getZeroStartAndEndDates = () => {
   const startDate = new Date();
   const endDate = new Date();
 
@@ -60,7 +60,7 @@ const getZeroStartAndEndDates = () => {
   };
 };
 
-const getMinuteDurationForEntry = (startDate, endDate, entry) => {
+export const getMinuteDurationForEntry = (startDate, endDate, entry) => {
   const startSplit = entry[dbKeys.startTime].split(':');
   const endSplit = entry[dbKeys.endTime].split(':');
 

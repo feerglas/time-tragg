@@ -1,0 +1,24 @@
+@import "../../styles/globals.scss";
+
+.summary {
+  margin-bottom: $summary-margin-bottom;
+  border-color: $summary-table-border-color;
+}
+
+.summary td {
+  padding: $summary-table-cell-padding;
+}
+
+.value {
+  text-align: right;
+}
+
+.months {
+  text-align: right;
+  border-color: $summary-table-border-color;
+}
+
+.months td,
+.months th {
+  padding: $summary-table-cell-padding;
+}
