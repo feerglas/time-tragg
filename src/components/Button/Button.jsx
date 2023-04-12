@@ -16,7 +16,7 @@ export function Button(props) {
       disabled={props.disabled}
       type={props.type}
       onClick={handleClick}
-      class={`${styles.button} ${props.class}`}
+      class={`${styles.button} ${props.class ? props.class : ''}`}
     >{props.text}{props.icon}</BootstrapButton>
   );
 }

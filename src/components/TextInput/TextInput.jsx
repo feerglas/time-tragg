@@ -1,17 +1,20 @@
 import { Show } from 'solid-js';
+import styles from './TextInput.module.scss';
 
 export function TextInput(props) {
   return (
     <label
+      class={`${styles.wrapper} ${props.class}`}
       classList={{
         'is-invalid': !!props.control.errors,
         'is-touched': props.control.isTouched,
         'is-required': props.control.isRequired,
       }}
     >
-      <span>{props.label}</span>
+      <span class={styles.label}>{props.label}</span>
 
       <input
+        class={styles.input}
         name={props.name}
         type={props.type}
         placeholder={props.placeholder || ''}
@@ -26,7 +29,7 @@ export function TextInput(props) {
       />
 
       <Show when={props.control.isTouched && !props.control.isValid}>
-        <span>{props.control.errors.message}</span>
+        <span class={styles.error}>{props.control.errors.message}</span>
       </Show>
     </label>
   );

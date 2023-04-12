@@ -1,0 +1,21 @@
+@import "../../styles/globals.scss";
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.label {
+  padding-right: $login-label-padding-right;
+}
+
+.input {
+  flex: 1;
+}
+
+.error {
+  display: block;
+  color: $login-error-message-color;
+  flex-basis: 100%;
+}

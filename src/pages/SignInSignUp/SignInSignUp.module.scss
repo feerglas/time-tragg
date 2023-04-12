@@ -1,0 +1,17 @@
+@import "../../styles/globals.scss";
+
+.radio {
+  margin: $login-radio-margin-vertical 0;
+}
+
+.input {
+  margin: 0 0 $login-input-margin-vertical;
+}
+
+.button {
+  margin: $login-button-margin-vertical 0;
+}
+
+.error {
+  color: $login-error-message-color;
+}

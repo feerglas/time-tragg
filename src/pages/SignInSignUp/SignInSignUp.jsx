@@ -10,6 +10,8 @@ import { PageTitle } from '../../components/PageTitle/PageTitle.jsx';
 import { fbSignUpUser, fbSignInUser } from '../../firebase/auth';
 import { isValidMail } from '../../helpers/validators';
 
+import styles from './SignInSignUp.module.scss';
+
 const radios = [
   {
     id: 'login',
@@ -29,6 +31,7 @@ function SignInSignUp() {
 
   const [isForLogin, setIsForLogin] = createSignal(true);
   const [loginError, setLoginError] = createSignal('');
+  const [loading, setIsLoading] = createSignal(false);
 
   const lengthValidator = (rawValue) => (!rawValue || rawValue.length < 6 ? { isMissing: true, message: 'password must have at least 6 characters' } : null);
   const mailValidator = (rawValue) => (!isValidMail(rawValue) ? { isMissing: true, message: 'this is not a valid email address' } : null);
@@ -45,6 +48,7 @@ function SignInSignUp() {
   });
 
   const onSubmit = async (evt) => {
+    setIsLoading(true);
     evt.preventDefault();
     setLoginError('');
 
@@ -61,6 +65,8 @@ function SignInSignUp() {
 
       navigate('/add', { replace: true });
     } catch (err) {
+      setIsLoading(false);
+
       if (isForLogin()) {
         if (err.message === 'auth/user-not-found' || err.message === 'auth/wrong-password') {
           setLoginError('wrong username or password.');
@@ -92,6 +98,7 @@ function SignInSignUp() {
           name='signInSignUp'
           radios={radios}
           handleChange={handleRadioChange}
+          class={styles.radio}
         />
 
         <TextInput
@@ -100,6 +107,7 @@ function SignInSignUp() {
           label="email"
           placeholder="email"
           control={group.controls.email}
+          class={styles.input}
         />
 
         <TextInput
@@ -108,11 +116,19 @@ function SignInSignUp() {
           label="password"
           placeholder="password"
           control={group.controls.password}
+          class={styles.input}
         />
 
-        <Button disabled={!group.isValid} type="submit" text={isForLogin() ? 'Login' : 'Sign Up'} />
+        <Button
+          disabled={!group.isValid || loading()}
+          type="submit"
+          text={isForLogin() ? 'Login' : 'Sign Up'}
+          class={styles.button}
+        />
 
-        <Show when={loginError().length > 0}>{loginError()}</Show>
+        <Show when={loginError().length > 0}>
+          <p class={styles.error}>{loginError()}</p>
+        </Show>
       </form>
 
       <Show when={isForLogin()}>
