@@ -3,6 +3,7 @@
   "start_url": ".",
   "display": "standalone",
   "background_color": "#cdcdcd",
+  "theme_color": "#0d6efd",
   "icons": [
     {
       "src": "android-chrome-512x512.png",
