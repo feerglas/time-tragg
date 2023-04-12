@@ -1,11 +1,12 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Table as BootstrapTable } from 'solid-bootstrap';
 import {
-  createResource, For, Show, createMemo,
+  For, Show, createMemo,
+  createResource,
 } from 'solid-js';
-import { getSummary } from './summary.data';
 import { useUid } from '../../components/UidProvider/UidProvider.jsx';
 import styles from './Summary.module.scss';
+import { getSummary } from './summary.data';
 
 function Summary() {
   const [uid] = useUid();
@@ -28,15 +29,15 @@ function Summary() {
 
     return [
       {
-        description: 'Total trainings',
+        description: 'Σ trainings',
         value: totalTrainings,
       },
       {
-        description: 'Total time',
+        description: 'Σ time',
         value: totalTime,
       },
       {
-        description: 'average min per workout',
+        description: 'ø min per workout',
         value: averageMinPerWorkout,
       },
       {
@@ -48,11 +49,11 @@ function Summary() {
         value: longest,
       },
       {
-        description: 'average workouts per week',
+        description: 'ø workouts / week',
         value: averageWorkoutsPerWeek,
       },
       {
-        description: 'average workouts per month',
+        description: 'ø workouts / month',
         value: averageWorkoutsPerMonth,
       },
     ];
@@ -61,7 +62,6 @@ function Summary() {
   return (
     <div>
       <BootstrapTable
-        striped
         size="sm"
         class={styles.summary}
       >
