@@ -17,10 +17,10 @@ function Footer() {
 
   return (
     <div class={styles.footer}>
-      <Show when={email}>
+      <Show
+        when={email() && uid()}
+      >
         <span class={styles.mail}>{email()}</span>
-      </Show>
-      <Show when={uid()}>
         <a class={styles.link} href="#" onClick={handleLogout}>
           <Icon classes={styles.icon} name='logout' />
           <span class={styles.text}>Logout</span>
