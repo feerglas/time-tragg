@@ -4,6 +4,7 @@ import { Button } from '../../components/Button/Button.jsx';
 import { DateTimePicker } from '../../components/DateTimePicker/DateTimePicker.jsx';
 import { addEntry } from '../../firebase/db';
 import { useUid } from '../../components/UidProvider/UidProvider.jsx';
+import styles from './Add.module.scss';
 
 function Add() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ function Add() {
       </form>
 
       <Show when={submitError()}>
-        <p>{submitError()}</p>
+        <p class={styles.error}>{submitError()}</p>
       </Show>
 
     </div>
