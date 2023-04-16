@@ -28,8 +28,20 @@ export const getAllEntries = async (uid) => {
     return [];
 
   } catch (error) {
-    throw new Error(error);
+    return new Error(error);
   }
+};
+
+export const entriesPlaceholder = () => {
+  const placeholderObject = {
+    date: '1983-02-09T06:35:16.672Z',
+    endTime: '09:00',
+    id: '',
+    sortDate: 0,
+    startTime: '08:00',
+  };
+
+  return new Array(20).fill(placeholderObject);
 };
 
 export const getAllEntriesForDateRange = (allEntries, from, to) => {
