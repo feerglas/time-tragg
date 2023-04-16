@@ -37,13 +37,17 @@ function EntriesTable(props) {
   });
 
   createEffect(() => {
-    if (!props.entries()) {
+    const entries = props.entries();
+
+    if (!entries) {
+      setCurrentItems(props.placeholder());
+
       return;
     }
 
     const startIndex = currentPage() * config.itemsPerPage;
     const endIndex = startIndex + config.itemsPerPage;
-    const newItems = props.entries().slice(startIndex, endIndex);
+    const newItems = entries.slice(startIndex, endIndex);
 
     setCurrentItems(newItems);
   });
