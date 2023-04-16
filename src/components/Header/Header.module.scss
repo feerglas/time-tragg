@@ -22,3 +22,8 @@
   color: $header-color-active;
   background-color: $header-background-active;
 }
+
+.link--disabled {
+  pointer-events: none;
+  color: $header-color-diabled;
+}

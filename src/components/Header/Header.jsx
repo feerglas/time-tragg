@@ -1,5 +1,5 @@
 import { A } from '@solidjs/router';
-import { Show, For } from 'solid-js';
+import { For } from 'solid-js';
 
 import { Icon } from '../Icon/Icon.jsx';
 import { useUid } from '../UidProvider/UidProvider.jsx';
@@ -25,18 +25,21 @@ function Header() {
 
   return (
     <ul class={styles.list}>
-      <Show when={uid()}>
-        <For each={navLinks}>
-          {(link) => (
-            <li class={styles.item}>
-              <A class={styles.link} activeClass={styles['link--active']} href={link.href}>
-                <Icon name={link.icon} />
-              </A>
-            </li>
-          )
-          }
-        </For>
-      </Show>
+      <For each={navLinks}>
+        {(link) => (
+          <li class={styles.item}>
+            <A
+              class={`${styles.link} ${!uid() ? styles['link--disabled'] : ''}`}
+              activeClass={styles['link--active']}
+              href={link.href}
+              disabled
+            >
+              <Icon name={link.icon} />
+            </A>
+          </li>
+        )
+        }
+      </For>
     </ul >
   );
 }
