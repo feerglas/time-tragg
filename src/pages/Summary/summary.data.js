@@ -193,25 +193,35 @@ const getTotalTime = (entries) => {
 };
 
 const getSummary = async (uid) => {
-  const allEntries = await getAllEntries(uid);
-  const totalTime = getTotalTime(allEntries);
-  const shortestLongest = getShortestLongestWorkouts(allEntries);
-  const firstWorkoutDate = allEntries[allEntries.length - 1][dbKeys.date];
-  const averageWorkoutsPerWeek = allEntries.length / getWeeksSinceDate(firstWorkoutDate);
-  const averageWorkoutsPerMonth = allEntries.length / getMonthsSinceDate(firstWorkoutDate);
-  const months = arrayOfMonthsSinceFirstWorkout(firstWorkoutDate);
-  const monthsWithWorkouts = addWorkoutsToMonths(allEntries, months);
+  try {
+    const allEntries = await getAllEntries(uid);
 
-  return {
-    totalTrainings: allEntries.length,
-    totalTime,
-    averageMinutesPerWorkout: Math.floor(totalTime.minutes / allEntries.length),
-    shortestWorkout: shortestLongest.min,
-    longestWorkout: shortestLongest.max,
-    averageWorkoutsPerWeek: averageWorkoutsPerWeek.toFixed(1),
-    averageWorkoutsPerMonth: averageWorkoutsPerMonth.toFixed(1),
-    months: monthsWithWorkouts,
-  };
+    if (allEntries instanceof Error) {
+      throw allEntries;
+    }
+
+    const totalTime = getTotalTime(allEntries);
+    const shortestLongest = getShortestLongestWorkouts(allEntries);
+    const firstWorkoutDate = allEntries[allEntries.length - 1][dbKeys.date];
+    const averageWorkoutsPerWeek = allEntries.length / getWeeksSinceDate(firstWorkoutDate);
+    const averageWorkoutsPerMonth = allEntries.length / getMonthsSinceDate(firstWorkoutDate);
+    const months = arrayOfMonthsSinceFirstWorkout(firstWorkoutDate);
+    const monthsWithWorkouts = addWorkoutsToMonths(allEntries, months);
+
+    return {
+      totalTrainings: allEntries.length,
+      totalTime,
+      averageMinutesPerWorkout: Math.floor(totalTime.minutes / allEntries.length),
+      shortestWorkout: shortestLongest.min,
+      longestWorkout: shortestLongest.max,
+      averageWorkoutsPerWeek: averageWorkoutsPerWeek.toFixed(1),
+      averageWorkoutsPerMonth: averageWorkoutsPerMonth.toFixed(1),
+      months: monthsWithWorkouts,
+    };
+  } catch (err) {
+    throw new Error(err);
+  }
+
 };
 
 export { getSummary };
