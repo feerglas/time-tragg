@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Table as BootstrapTable } from 'solid-bootstrap';
 import {
-  For, Show, createMemo, createResource, createSignal
+  For, Show, createMemo, createResource, createSignal,
 } from 'solid-js';
 import { Alert } from '../../components/Alert/Alert.jsx';
 import { useUid } from '../../components/UidProvider/UidProvider.jsx';
