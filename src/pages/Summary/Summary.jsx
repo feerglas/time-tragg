@@ -1,16 +1,32 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Table as BootstrapTable } from 'solid-bootstrap';
 import {
-  For, Show, createMemo,
-  createResource,
+  For, Show, createMemo, createResource, createSignal
 } from 'solid-js';
+import { Alert } from '../../components/Alert/Alert.jsx';
 import { useUid } from '../../components/UidProvider/UidProvider.jsx';
 import styles from './Summary.module.scss';
 import { getSummary } from './summary.data';
 
 function Summary() {
+  const [fetchError, setFetchError] = createSignal(false);
+
+  const loadSummary = async (uid) => {
+    setFetchError(false);
+
+    try {
+      return await getSummary(uid);
+    } catch {
+      setFetchError(true);
+
+      return false;
+    }
+
+  };
+
   const [uid] = useUid();
-  const [data] = createResource(uid, getSummary);
+  const [data] = createResource(uid, loadSummary);
+
   const summary = createMemo(() => {
     const totalTrainings = data()?.totalTrainings || 0;
     const totalTimeMin = data()?.totalTime.minutes || 0;
@@ -61,15 +77,22 @@ function Summary() {
 
   return (
     <div>
+      <Alert
+        title="Error"
+        text="There was an error fetching the entries..."
+        show={fetchError}
+        onClose={() => setFetchError(false)}
+      />
       <BootstrapTable
         size="sm"
         class={styles.summary}
+        variant="dark"
       >
         <tbody>
           <For each={summary()}>
             {(item) => (
               <tr>
-                <td>{item.description}</td>
+                <td class={styles['item-description']}>{item.description}</td>
                 <td class={styles.value}>{item.value}</td>
               </tr>
             )}
@@ -88,14 +111,14 @@ function Summary() {
             <th />
             <th>min</th>
             <th>min / max</th>
-            <th>total</th>
-            <th>average</th>
+            <th>Σ</th>
+            <th>ø</th>
           </tr>
         </thead>
         <tbody>
           <For each={data()?.months}>
-            {(entry) => (
-              <tr>
+            {(entry, index) => (
+              <tr class={index() === 0 ? styles['month-current'] : ''}>
                 <td>
                   {entry.monthName.substring(0, 3)} {entry.year.toString().substring(2, 4)}
                 </td>
@@ -112,7 +135,7 @@ function Summary() {
                     when={entry.summary.totalWorkouts > 0}
                     fallback={<span>-</span>}
                   >
-                    <span>{entry.summary.min}</span>/<span>{entry.summary.max}</span>
+                    <span>{entry.summary.min}</span> / <span>{entry.summary.max}</span>
                   </Show>
                 </td>
                 <td>

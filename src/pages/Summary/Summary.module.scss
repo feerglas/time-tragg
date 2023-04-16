@@ -7,6 +7,11 @@
 
 .summary td {
   padding: $summary-table-cell-padding;
+  vertical-align: middle;
+}
+
+.item-description {
+  font-size: $summary-item-description-font-size;
 }
 
 .value {
@@ -21,4 +26,9 @@
 .months td,
 .months th {
   padding: $summary-table-cell-padding;
+  vertical-align: middle;
+}
+
+table.months tr.month-current {
+  color: $summary-table-current-month-color;
 }
